@@ -1,0 +1,337 @@
+{% extends 'base.html' %}
+
+{% block title %}Feedback - Share Bite{% endblock %}
+
+{% block content %}
+<style>
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+}
+
+.feedback-wrapper {
+    padding: 40px 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.feedback-box {
+    background: white;
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.feedback-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.feedback-header h1 {
+    color: #667eea;
+    margin-bottom: 10px;
+    font-size: 2rem;
+}
+
+.feedback-header p {
+    color: #666;
+    font-size: 0.95rem;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.form-input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.form-textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    min-height: 120px;
+    resize: vertical;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.form-textarea:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.rating-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.rating-option {
+    flex: 1;
+}
+
+.rating-option input[type="radio"] {
+    display: none;
+}
+
+.rating-label {
+    display: block;
+    padding: 12px;
+    text-align: center;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    color: #666;
+    transition: all 0.3s ease;
+    background: #f9f9f9;
+}
+
+.rating-option input[type="radio"]:checked + .rating-label {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-color: #667eea;
+}
+
+.rating-label:hover {
+    border-color: #667eea;
+    background: #f0f0ff;
+}
+
+.rating-option input[type="radio"]:checked + .rating-label:hover {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.select-field {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    background: white;
+    transition: all 0.3s ease;
+}
+
+.select-field:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.submit-button {
+    width: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.submit-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+}
+
+.submit-button:active {
+    transform: translateY(0);
+}
+
+.form-errors {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #ffe0e0;
+    border-left: 4px solid #ff6b6b;
+    border-radius: 5px;
+    color: #cc0000;
+}
+
+.form-errors ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.form-errors li {
+    margin: 5px 0;
+}
+
+.success-message {
+    padding: 15px;
+    background: #e0ffe0;
+    border-left: 4px solid #4caf50;
+    border-radius: 5px;
+    color: #2d6b2f;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 600px) {
+    .feedback-box {
+        padding: 25px;
+    }
+
+    .feedback-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .rating-group {
+        gap: 5px;
+    }
+
+    .rating-label {
+        padding: 8px;
+        font-size: 0.85rem;
+    }
+}
+</style>
+
+<div class="feedback-wrapper">
+    <div class="feedback-box">
+        <div class="feedback-header">
+            <h1>Share Your Feedback</h1>
+            <p>Your feedback helps us improve our services and better serve our community</p>
+        </div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    {% if category == 'success' %}
+                        <div class="success-message">{{ message }}</div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST" novalidate>
+            {{ form.hidden_tag() }}
+
+            {% if form.name.errors %}
+                <div class="form-errors">
+                    <ul>
+                        {% for error in form.name.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            <div class="form-group">
+                {{ form.name.label }}
+                {{ form.name(class="form-input", placeholder="Enter your name") }}
+            </div>
+
+            {% if form.email.errors %}
+                <div class="form-errors">
+                    <ul>
+                        {% for error in form.email.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            <div class="form-group">
+                {{ form.email.label }}
+                {{ form.email(class="form-input", placeholder="your.email@example.com") }}
+            </div>
+
+            {% if form.phone.errors %}
+                <div class="form-errors">
+                    <ul>
+                        {% for error in form.phone.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            <div class="form-group">
+                {{ form.phone.label }}
+                {{ form.phone(class="form-input", placeholder="Your phone number") }}
+            </div>
+
+            {% if form.rating.errors %}
+                <div class="form-errors">
+                    <ul>
+                        {% for error in form.rating.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            <div class="form-group">
+                {{ form.rating.label }}
+                <div class="rating-group">
+                    {% for choice_value, choice_label in form.rating.choices %}
+                        <div class="rating-option">
+                            {{ form.rating(value=choice_value, **{'class': ''}) }}
+                            <label class="rating-label">{{ choice_label }}</label>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            {% if form.message.errors %}
+                <div class="form-errors">
+                    <ul>
+                        {% for error in form.message.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            <div class="form-group">
+                {{ form.message.label }}
+                {{ form.message(class="form-textarea", placeholder="Please share your feedback, suggestions, or concerns...") }}
+            </div>
+
+            <button type="submit" class="submit-button">{{ form.submit.label }}</button>
+        </form>
+
+        <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e0e0e0; text-align: center;">
+            <p style="color: #999; font-size: 0.9rem;">
+                Can't scan? 
+                <a href="{{ url_for('feedback') }}" style="color: #667eea; text-decoration: none; font-weight: 600;">Click here to open feedback form</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>
+// Handle radio button styling when clicked
+document.querySelectorAll('.rating-option input[type="radio"]').forEach(radio => {
+    radio.addEventListener('change', function() {
+        document.querySelectorAll('.rating-option .rating-label').forEach(label => {
+            label.style.transition = 'all 0.3s ease';
+        });
+    });
+});
+</script>
+
+{% endblock %}

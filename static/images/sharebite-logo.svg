@@ -1,0 +1,35 @@
+<svg width="400" height="220" viewBox="0 0 400 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bowlGradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F4C242" />
+      <stop offset="100%" stop-color="#F6982D" />
+    </linearGradient>
+    <linearGradient id="leafGradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#6CC56D" />
+      <stop offset="100%" stop-color="#2C8A3B" />
+    </linearGradient>
+    <linearGradient id="textGradient" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#2A6A34" />
+      <stop offset="100%" stop-color="#ED6A1B" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="220" rx="30" fill="white" />
+  <path d="M70 110 C70 70, 330 70, 330 110 C330 150, 70 150, 70 110 Z" fill="url(#bowlGradient)" stroke="#DD8A2A" stroke-width="6" />
+  <path d="M120 95 C120 55, 180 50, 190 90 C200 50, 260 55, 260 95 C260 120, 125 125, 120 95 Z" fill="#9BE567" />
+  <path d="M150 80 C150 55, 190 55, 190 80 C190 100, 150 100, 150 80 Z" fill="#D4F683" />
+  <path d="M200 80 C200 55, 230 55, 230 80 C230 100, 200 100, 200 80 Z" fill="#8FDB4C" />
+  <path d="M105 103 C105 90, 115 80, 130 78 C135 88, 130 102, 105 103 Z" fill="#FF955D" />
+  <path d="M225 105 C225 90, 240 83, 255 85 C258 95, 252 108, 225 105 Z" fill="#F5B154" />
+  <path d="M170 105 C170 92, 182 88, 192 90 C193 102, 188 110, 170 105 Z" fill="#FFD47D" />
+  <path d="M160 128 C165 134, 178 134, 184 128" stroke="#955428" stroke-width="5" stroke-linecap="round" />
+  <circle cx="165" cy="104" r="10" fill="#2E2E2E" />
+  <circle cx="215" cy="104" r="10" fill="#2E2E2E" />
+  <path d="M170 128 Q190 145, 210 128" stroke="#2E2E2E" stroke-width="5" fill="none" stroke-linecap="round" />
+  <path d="M150 130 L190 120" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" opacity="0.6" />
+  <text x="200" y="190" dominant-baseline="middle" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="40" font-weight="800" fill="url(#textGradient)">
+    ShareBite
+  </text>
+  <text x="200" y="215" dominant-baseline="middle" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="18" fill="#2C8A3B">
+    Waste Food Reuse
+  </text>
+</svg>

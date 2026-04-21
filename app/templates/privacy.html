@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Share Bite</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .content-wrapper {
+            min-height: calc(100vh - 200px);
+            padding: 40px 20px;
+        }
+        
+        .content-box {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+        }
+        
+        .content-box h1 {
+            color: #667eea;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .content-box h2 {
+            color: #333;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .content-box p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        .content-box ul {
+            color: #666;
+            margin: 15px 0 15px 30px;
+            line-height: 1.8;
+        }
+        
+        .content-box li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    {% include 'base.html' %}
+    <div class="content-wrapper">
+        <div class="content-box">
+            <h1>🔒 Privacy Policy</h1>
+            <p>At Share Bite, we are committed to protecting your privacy. This Privacy Policy outlines how we collect, use, and safeguard your information when you use our application.</p>
+            
+            <h2>📋 Information We Collect</h2>
+            <p>We may collect personal information from users when they register, log in, or interact with our services. This may include:</p>
+            <ul>
+                <li>Name</li>
+                <li>Email address</li>
+                <li>Organization details (for NGOs and restaurants)</li>
+                <li>Location information</li>
+            </ul>
+
+            <h2>🎯 How We Use Your Information</h2>
+            <p>Your information may be used in the following ways:</p>
+            <ul>
+                <li>To connect NGOs with restaurants that have excess food.</li>
+                <li>To improve our application and services.</li>
+                <li>To communicate with you regarding your account or services.</li>
+            </ul>
+
+            <h2>🔐 Data Security</h2>
+            <p>We implement a variety of security measures to maintain the safety of your personal information. However, no method of transmission over the internet or method of electronic storage is 100% secure.</p>
+
+            <h2>📝 Changes to This Privacy Policy</h2>
+            <p>We may update this Privacy Policy from time to time. We will notify you about significant changes in the way we treat personal information by sending a notice to the primary email address specified in your account or by placing a prominent notice on our site.</p>
+
+            <h2>📧 Contact Us</h2>
+            <p>If you have any questions about this Privacy Policy, please contact us through our <a href="{{ url_for('contact') }}" style="color: #667eea; text-decoration: none; font-weight: bold;">Contact Us</a> page.</p>
+        </div>
+    </div>
+</body>
+</html>

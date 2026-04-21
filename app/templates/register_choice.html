@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+
+{% block title %}Register - Choose Your Role - Share Bite{% endblock %}
+
+{% block content %}
+<div class="choice-container">
+    <div class="choice-content">
+        <h1>🎯 Create Your Account</h1>
+        <p class="subtitle">Choose your role to get started</p>
+
+        <div class="choice-cards">
+            <a href="{{ url_for('restaurant_register') }}" class="choice-card restaurant-card">
+                <div class="card-icon">🍽️</div>
+                <h2>Restaurant</h2>
+                <p>Donate excess food and make an impact</p>
+                <div class="card-footer">Register as Restaurant →</div>
+            </a>
+
+            <a href="{{ url_for('ngo_register') }}" class="choice-card ngo-card">
+                <div class="card-icon">🤝</div>
+                <h2>NGO</h2>
+                <p>Receive food donations for your community</p>
+                <div class="card-footer">Register as NGO →</div>
+            </a>
+
+            <a href="{{ url_for('donor_register') }}" class="choice-card donor-card">
+                <div class="card-icon">💝</div>
+                <h2>Donor</h2>
+                <p>Contribute funds to support our mission</p>
+                <div class="card-footer">Register as Donor →</div>
+            </a>
+        </div>
+
+        <div class="login-link">
+            <p>Already have an account? <a href="{{ url_for('login') }}">Login here</a></p>
+        </div>
+    </div>
+</div>
+
+<style>
+.choice-container {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 20px;
+}
+
+.choice-content {
+    max-width: 1100px;
+    width: 100%;
+}
+
+.choice-content h1 {
+    text-align: center;
+    color: white;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1rem;
+    margin-bottom: 40px;
+}
+
+.choice-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.choice-card {
+    background: white;
+    border-radius: 15px;
+    padding: 40px 30px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 2px solid transparent;
+    cursor: pointer;
+}
+
+.choice-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.restaurant-card {
+    border-color: #667eea;
+}
+
+.restaurant-card:hover {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.ngo-card {
+    border-color: #06d6a0;
+}
+
+.ngo-card:hover {
+    background: linear-gradient(135deg, #06d6a0 0%, #0ab886 100%);
+    color: white;
+}
+
+.donor-card {
+    border-color: #ff6b6b;
+}
+
+.donor-card:hover {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ff5252 100%);
+    color: white;
+}
+
+.card-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.choice-card h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: inherit;
+}
+
+.choice-card p {
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+    color: #666;
+}
+
+.choice-card:hover p {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.card-footer {
+    color: #667eea;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.restaurant-card:hover .card-footer,
+.ngo-card:hover .card-footer,
+.donor-card:hover .card-footer {
+    color: white;
+}
+
+.login-link {
+    text-align: center;
+    color: white;
+    font-size: 1rem;
+}
+
+.login-link a {
+    color: #ffeb3b;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .choice-content h1 {
+        font-size: 2rem;
+    }
+    
+    .choice-cards {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+{% endblock %}

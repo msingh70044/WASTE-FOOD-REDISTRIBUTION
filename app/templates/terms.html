@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms and Conditions - Share Bite</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .content-wrapper {
+            min-height: calc(100vh - 200px);
+            padding: 40px 20px;
+        }
+        
+        .content-box {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+        }
+        
+        .content-box h1 {
+            color: #667eea;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .content-box h2 {
+            color: #333;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .content-box p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        section {
+            margin-bottom: 25px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    {% include 'base.html' %}
+    <div class="content-wrapper">
+        <div class="content-box">
+            <h1>📋 Terms and Conditions</h1>
+            <section>
+                <h2>📖 Introduction</h2>
+                <p>Welcome to Share Bite! These terms and conditions outline the rules and regulations for the use of our application.</p>
+            </section>
+            <section>
+                <h2>✅ Acceptance of Terms</h2>
+                <p>By accessing this application, you accept these terms and conditions in full. If you disagree with any part of these terms, you must not use our application.</p>
+            </section>
+            <section>
+                <h2>🍱 Use of the Application</h2>
+                <p>Share Bite connects NGOs with restaurants to facilitate the donation of excess edible food. Users must ensure that all food donated is safe for consumption.</p>
+            </section>
+            <section>
+                <h2>⚖️ Liability</h2>
+                <p>Share Bite is not liable for any damages arising from the use of the application or the food donated through it.</p>
+            </section>
+            <section>
+                <h2>🔄 Changes to Terms</h2>
+                <p>We may update these terms from time to time. We will notify users of any changes by posting the new terms on this page.</p>
+            </section>
+            <section>
+                <h2>📞 Contact Information</h2>
+                <p>If you have any questions about these terms, please contact us through our <a href="{{ url_for('contact') }}" style="color: #667eea; text-decoration: none; font-weight: bold;">contact page</a>.</p>
+            </section>
+            <footer>
+                <p>&copy; 2023-2026 Share Bite. All rights reserved.</p>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>

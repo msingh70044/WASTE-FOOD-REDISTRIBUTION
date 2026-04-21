@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>{% block title %}Share Bite{% endblock %}</title>
+</head>
+<body>
+    <header class="top-header">
+        <div class="brand">
+            <div class="brand-badge">Community-first</div>
+            <img src="{{ url_for('static', filename='images/sharebite-logo.svg') }}" alt="Share Bite logo" class="site-logo">
+            <p class="brand-tagline">Saving food, helping people, and building stronger communities.</p>
+        </div>
+        <nav class="main-nav">
+            <button class="menu-button" id="mainMenuButton" aria-expanded="false" aria-label="Open navigation menu">
+                <span class="menu-dot"></span>
+                <span class="menu-dot"></span>
+                <span class="menu-dot"></span>
+            </button>
+            <div class="menu-dropdown" id="mainMenuDropdown" aria-hidden="true">
+                <a href="{{ url_for('landing') }}">Home</a>
+                <a href="{{ url_for('login') }}">Login</a>
+                <a href="{{ url_for('contact') }}">Contact</a>
+                <a href="{{ url_for('privacy') }}">Privacy</a>
+                <a href="{{ url_for('terms') }}">Terms</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="page-content">
+        <main class="content-area">
+            {% block content %}{% endblock %}
+        </main>
+
+        <aside class="vertical-panel">
+            <div class="panel-menu">
+                <div class="panel-label">Quick Menu</div>
+                <div class="panel-icons">
+                    <button class="panel-icon active" data-panel="panelAd" aria-label="Advertisement section">SB</button>
+                    <button class="panel-icon" data-panel="panelPromo" aria-label="Partner app section">NG</button>
+                    <button class="panel-icon" data-panel="panelUser" aria-label="User panel section">FD</button>
+                </div>
+            </div>
+            <div class="panel-card" id="panelAd">
+                <h3>Advertisement</h3>
+                <p>Discover our partner app for food rescue and volunteer support.</p>
+                <a href="#" class="button">Learn More</a>
+            </div>
+            <div class="panel-card hidden" id="panelPromo">
+                <h3>Partner App</h3>
+                <p>Tap these icons to explore essentials without cluttering the page.</p>
+                <div class="info-chip">Designed for restaurants, NGOs, and donors</div>
+            </div>
+            <div class="panel-card hidden" id="panelUser">
+                <h3>User Panel</h3>
+                <ul>
+                    <li>Restaurant food posting</li>
+                    <li>NGO receiving updates</li>
+                    <li>Donor contribution tracking</li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <img src="{{ url_for('static', filename='images/sharebite-logo.svg') }}" alt="Share Bite logo" class="footer-logo">
+                <p>Connecting donors, restaurants, and NGOs through food-sharing impact.</p>
+            </div>
+            <div class="footer-links">
+                <a href="{{ url_for('landing') }}">Home</a>
+                <a href="{{ url_for('login') }}">Login</a>
+                <a href="{{ url_for('contact') }}">Contact</a>
+                <a href="{{ url_for('privacy') }}">Privacy</a>
+                <a href="{{ url_for('terms') }}">Terms</a>
+            </div>
+        </div>
+        <p class="footer-note">&copy; 2026 All rights reserved.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>

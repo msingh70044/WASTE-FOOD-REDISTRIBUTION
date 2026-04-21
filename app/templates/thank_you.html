@@ -1,0 +1,219 @@
+{% extends 'base.html' %}
+
+{% block title %}Thank You - Share Bite{% endblock %}
+
+{% block content %}
+<style>
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.thank-you-container {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.thank-you-card {
+    background: white;
+    border-radius: 20px;
+    padding: 50px 40px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    max-width: 500px;
+    margin: 0 auto;
+    animation: slideUp 0.6s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.thank-you-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    animation: bounce 1s ease-in-out;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.thank-you-title {
+    font-size: 2.5rem;
+    color: #667eea;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.thank-you-subtitle {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+.thank-you-message {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    color: #333;
+    font-size: 1rem;
+    line-height: 1.8;
+    border-left: 5px solid #667eea;
+}
+
+.thank-you-message strong {
+    color: #667eea;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.action-button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.primary-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.primary-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+}
+
+.secondary-btn {
+    background: #f0f0f0;
+    color: #333;
+    border: 2px solid #667eea;
+}
+
+.secondary-btn:hover {
+    background: #f9f9f9;
+    border-color: #764ba2;
+}
+
+.highlights {
+    margin: 25px 0;
+    font-size: 0.95rem;
+    color: #666;
+}
+
+.highlights ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.highlights li {
+    padding: 8px 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.highlights li:last-child {
+    border-bottom: none;
+}
+
+.highlights li:before {
+    content: "✓ ";
+    color: #667eea;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.footer-text {
+    margin-top: 25px;
+    font-size: 0.85rem;
+    color: #999;
+}
+
+@media (max-width: 600px) {
+    .thank-you-card {
+        padding: 30px 20px;
+    }
+
+    .thank-you-title {
+        font-size: 2rem;
+    }
+
+    .thank-you-subtitle {
+        font-size: 1rem;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+
+    .action-button {
+        width: 100%;
+    }
+}
+</style>
+
+<div class="thank-you-container">
+    <div class="thank-you-card">
+        <div class="thank-you-icon">🎉</div>
+        
+        <h1 class="thank-you-title">Thank You!</h1>
+        
+        <p class="thank-you-subtitle">Thank you for your valuable feedback!</p>
+        
+        <div class="thank-you-message">
+            <strong>We consider it feedback.</strong>
+            Your input helps us improve our services and better serve our community. We truly appreciate you taking the time to share your thoughts with us.
+        </div>
+
+        <div class="highlights">
+            <ul>
+                <li>Your feedback has been recorded</li>
+                <li>We'll review it carefully</li>
+                <li>Your insights help us improve</li>
+            </ul>
+        </div>
+
+        <div class="action-buttons">
+            <a href="{{ url_for('landing') }}" class="action-button primary-btn">
+                🏠 Back to Home
+            </a>
+            <a href="{{ url_for('feedback') }}" class="action-button secondary-btn">
+                💬 Give More Feedback
+            </a>
+        </div>
+
+        <div class="footer-text">
+            <p>Share Bite - Building stronger communities, one meal at a time</p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

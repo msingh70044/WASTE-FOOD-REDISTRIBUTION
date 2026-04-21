@@ -1,0 +1,414 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin Dashboard - Share Bite{% endblock %}
+
+{% block content %}
+<style>
+body {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    min-height: 100vh;
+}
+
+.dashboard-wrapper {
+    padding: 30px 20px;
+}
+
+.admin-summary {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.admin-summary h2 {
+    color: #4facfe;
+    margin-bottom: 10px;
+}
+
+.admin-summary p {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.summary-card {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.summary-card h3 {
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    opacity: 0.9;
+}
+
+.summary-card p {
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+}
+
+.dashboard-box {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-box h3 {
+    color: #4facfe;
+    margin-bottom: 20px;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.data-table thead {
+    background: #f5f5f5;
+}
+
+.data-table th, .data-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.data-table tbody tr:hover {
+    background: #f9f9f9;
+}
+
+.data-table th {
+    font-weight: 600;
+    color: #333;
+}
+
+.data-table td {
+    color: #666;
+}
+
+.qr-card {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.qr-card h3 {
+    color: #4facfe;
+    margin-bottom: 15px;
+}
+
+.qr-card p {
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.qr-card img {
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.feedback-badge {
+    display: inline-block;
+    background: #ff6b6b;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-left: 10px;
+}
+
+.unread-badge {
+    background: #ff6b6b;
+}
+
+.read-badge {
+    background: #99999a;
+}
+
+.rating-stars {
+    color: #ffc107;
+    font-size: 1.1rem;
+}
+
+.feedback-message {
+    max-height: 100px;
+    overflow-y: auto;
+    padding: 10px;
+    background: #f9f9f9;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: #555;
+}
+
+.feedback-date {
+    font-size: 0.85rem;
+    color: #999;
+}
+
+.mark-read-btn {
+    background: #4facfe;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+}
+
+.mark-read-btn:hover {
+    background: #00f2fe;
+}
+
+.mark-read-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+.delete-btn {
+    background: #ff6b6b;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+}
+
+.delete-btn:hover {
+    background: #ff5252;
+    box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+}
+
+.action-cell {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.flash-message {
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border-left: 5px solid;
+}
+
+.flash-success {
+    background: #d4edda;
+    border-left-color: #28a745;
+    color: #155724;
+}
+
+.flash-error {
+    background: #f8d7da;
+    border-left-color: #f5c6cb;
+    color: #721c24;
+}
+</style>
+
+<div class="dashboard-wrapper">
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="flash-message flash-{{ category }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<section class="admin-summary">
+    <h2>📊 Admin Dashboard</h2>
+    <p>Complete overview of Share Bite platform activities and financial data.</p>
+    <div class="summary-grid">
+        <div class="summary-card">
+            <h3>👤 Fund Donors</h3>
+            <p>{{ donors|length }}</p>
+        </div>
+        <div class="summary-card">
+            <h3>💵 Total Funds</h3>
+            <p>₹{{ "%.2f"|format(total_amount) }}</p>
+        </div>
+        <div class="summary-card">
+            <h3>🍴 Available Donations</h3>
+            <p>{{ available_count }}</p>
+        </div>
+        <div class="summary-card">
+            <h3>📋 Total Food Items</h3>
+            <p>{{ food_items|length }}</p>
+        </div>
+        <div class="summary-card">
+            <h3>💬 Feedback Messages</h3>
+            <p>{{ feedback_list|length }}</p>
+        </div>
+        {% if unread_feedback_count > 0 %}
+        <div class="summary-card" style="background: linear-gradient(135deg, #ff6b6b 0%, #ff5252 100%);">
+            <h3>🔔 Unread Feedback</h3>
+            <p>{{ unread_feedback_count }}</p>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<section class="dashboard-box">
+    <h3>💝 Recent Fund Donations</h3>
+    {% if donors %}
+    <div style="overflow-x: auto;">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>👤 Donor Name</th>
+                <th>📱 Contact</th>
+                <th>📬 Email</th>
+                <th>💵 Amount</th>
+                <th>🗑️ Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for donor in donors %}
+            <tr>
+                <td><strong>{{ donor.name }}</strong></td>
+                <td>{{ donor.contact_info }}</td>
+                <td>{{ donor.email }}</td>
+                <td><strong style="color: #4facfe;">{{ donor.amount }}</strong></td>
+                <td>
+                    <form action="{{ url_for('delete_donor', donor_id=donor.id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Are you sure you want to remove this donor record?');">
+                        <button type="submit" class="delete-btn">🗑️ Remove</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+    {% else %}
+    <p style="text-align: center; color: #999; padding: 30px;">No fund donors have submitted details yet.</p>
+    {% endif %}
+</section>
+
+<section class="dashboard-box">
+    <h3>🍴 Food Donation Records</h3>
+    {% if food_items %}
+    <div style="overflow-x: auto;">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>🍴 Food Item</th>
+                <th>🏪 Restaurant</th>
+                <th>📦 Quantity</th>
+                <th>✅ Status</th>
+                <th>🤝 NGO Recipient</th>
+                <th>🗑️ Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in food_items %}
+            <tr>
+                <td><strong>{{ item.food_name }}</strong></td>
+                <td>{{ item.restaurant_name }}</td>
+                <td>{{ item.quantity }}</td>
+                <td><span style="background: {% if item.status == 'Available' %}#4facfe{% else %}#43e97b{% endif %}; color: white; padding: 5px 10px; border-radius: 4px; font-size: 0.9em;">{{ item.status }}</span></td>
+                <td>{{ item.ngo_name or '🔘 Pending' }}</td>
+                <td>
+                    <form action="{{ url_for('delete_food_item', food_id=item.id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Are you sure you want to remove this food item?');">
+                        <button type="submit" class="delete-btn">🗑️ Remove</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+    {% else %}
+    <p style="text-align: center; color: #999; padding: 30px;">No food records have been added yet.</p>
+    {% endif %}
+</section>
+
+<section class="qr-card">
+    <h3>📄 App Feedback QR Code</h3>
+    <p>Scan to provide feedback and help us improve Share Bite!</p>
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=http://localhost:5000/feedback" alt="Feedback QR code">
+    <p style="color: #666; font-size: 0.9em; margin-top: 15px;">Help us serve you better 👋</p>
+</section>
+
+<section class="dashboard-box">
+    <h3>💬 Feedback Messages {% if unread_feedback_count > 0 %}<span class="feedback-badge unread-badge">{{ unread_feedback_count }} New</span>{% endif %}</h3>
+    {% if feedback_list %}
+    <div style="overflow-x: auto;">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>👤 Name</th>
+                <th>📧 Email</th>
+                <th>📱 Phone</th>
+                <th>⭐ Rating</th>
+                <th>💬 Feedback</th>
+                <th>📅 Date</th>
+                <th>✅ Status</th>
+                <th>📌 Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for feedback in feedback_list %}
+            <tr style="{% if not feedback.read %}background: #fff9f0;{% endif %}">
+                <td><strong>{{ feedback.name }}</strong></td>
+                <td>{{ feedback.email }}</td>
+                <td>{{ feedback.phone }}</td>
+                <td>
+                    <span class="rating-stars">
+                        {% for i in range(1, feedback.rating + 1) %}⭐{% endfor %}
+                    </span>
+                    ({{ feedback.rating }}/5)
+                </td>
+                <td>
+                    <div class="feedback-message">{{ feedback.message }}</div>
+                </td>
+                <td>
+                    <span class="feedback-date">{{ feedback.submitted_at.strftime('%d-%m-%Y %H:%M') }}</span>
+                </td>
+                <td>
+                    <span class="feedback-badge {% if feedback.read %}read-badge{% else %}unread-badge{% endif %}">
+                        {% if feedback.read %}Read{% else %}Unread{% endif %}
+                    </span>
+                </td>
+                <td>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                        {% if not feedback.read %}
+                        <form action="{{ url_for('mark_feedback_read', feedback_id=feedback.id) }}" method="POST" style="display: inline;">
+                            <button type="submit" class="mark-read-btn">Mark as Read</button>
+                        </form>
+                        {% else %}
+                        <button class="mark-read-btn" disabled>Read</button>
+                        {% endif %}
+                        <form action="{{ url_for('delete_feedback', feedback_id=feedback.id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Are you sure you want to remove this feedback?');">
+                            <button type="submit" class="delete-btn">🗑️ Remove</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+    {% else %}
+    <p style="text-align: center; color: #999; padding: 30px;">No feedback messages yet. Share the QR code to collect feedback!</p>
+    {% endif %}
+</section>
+</div>
+{% endblock %}

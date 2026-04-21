@@ -1,0 +1,219 @@
+{% extends "base.html" %}
+
+{% block title %}Register NGO - Share Bite{% endblock %}
+
+{% block content %}
+<div class="form-page-container">
+    <div class="form-container">
+        <div class="form-header">
+            <h1>🤝 NGO Registration</h1>
+            <p>Help your community access fresh food donations</p>
+        </div>
+
+        <form method="POST" class="registration-form">
+            {{ form.hidden_tag() }}
+            
+            <div class="form-group">
+                <label for="ngo_id">NGO ID</label>
+                {% if form.ngo_id.errors %}
+                    {{ form.ngo_id(class="form-input error-input") }}
+                    <div class="error-message">
+                        {% for error in form.ngo_id.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.ngo_id(class="form-input") }}
+                {% endif %}
+                <small>Unique identifier for your NGO</small>
+            </div>
+
+            <div class="form-group">
+                <label for="ngo_name">NGO Name</label>
+                {% if form.ngo_name.errors %}
+                    {{ form.ngo_name(class="form-input error-input") }}
+                    <div class="error-message">
+                        {% for error in form.ngo_name.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.ngo_name(class="form-input") }}
+                {% endif %}
+                <small>Your NGO's full name</small>
+            </div>
+
+            <div class="form-group">
+                <label for="contact_info">Contact Number</label>
+                {% if form.contact_info.errors %}
+                    {{ form.contact_info(class="form-input error-input") }}
+                    <div class="error-message">
+                        {% for error in form.contact_info.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.contact_info(class="form-input") }}
+                {% endif %}
+                <small>Best contact number to reach you</small>
+            </div>
+
+            <div class="form-group">
+                {{ form.submit(class="submit-button") }}
+            </div>
+        </form>
+
+        <div class="form-footer">
+            <p>Already registered? <a href="{{ url_for('ngo_login') }}">Login here</a></p>
+            <p><a href="{{ url_for('landing') }}">← Back to Home</a></p>
+        </div>
+    </div>
+</div>
+
+<style>
+.form-page-container {
+    min-height: 80vh;
+    background: linear-gradient(135deg, #06d6a0 0%, #0ab886 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.form-container {
+    background: white;
+    border-radius: 15px;
+    padding: 40px;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.form-header h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #06d6a0;
+}
+
+.form-header p {
+    color: #666;
+    font-size: 0.95rem;
+}
+
+.registration-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #333;
+    font-size: 0.95rem;
+}
+
+.form-input {
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #06d6a0;
+    box-shadow: 0 0 0 3px rgba(6, 214, 160, 0.1);
+}
+
+.form-input.error-input {
+    border-color: #ff5252;
+}
+
+.form-input.error-input:focus {
+    box-shadow: 0 0 0 3px rgba(255, 82, 82, 0.1);
+}
+
+.error-message {
+    color: #ff5252;
+    font-size: 0.85rem;
+    margin-top: 5px;
+}
+
+.form-group small {
+    color: #999;
+    font-size: 0.85rem;
+    margin-top: 5px;
+}
+
+.submit-button {
+    padding: 12px;
+    background: linear-gradient(135deg, #06d6a0 0%, #0ab886 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.submit-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(6, 214, 160, 0.3);
+}
+
+.submit-button:active {
+    transform: translateY(0);
+}
+
+.form-footer {
+    margin-top: 30px;
+    text-align: center;
+    border-top: 1px solid #e0e0e0;
+    padding-top: 20px;
+}
+
+.form-footer p {
+    color: #666;
+    font-size: 0.9rem;
+    margin: 8px 0;
+}
+
+.form-footer a {
+    color: #06d6a0;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.form-footer a:hover {
+    color: #0ab886;
+    text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+    .form-container {
+        padding: 25px;
+    }
+    
+    .form-header h1 {
+        font-size: 1.5rem;
+    }
+}
+</style>
+{% endblock %}

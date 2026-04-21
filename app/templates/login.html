@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Login - Share Bite{% endblock %}
+
+{% block content %}
+<section class="section-card">
+    <h2>Login Portal</h2>
+    <p>Select the correct portal to manage your Share Bite activity.</p>
+    <div class="choice-grid">
+        <a class="portal-card" href="{{ url_for('restaurant_login') }}">Restaurant Login</a>
+        <a class="portal-card" href="{{ url_for('ngo_login') }}">NGO Login</a>
+        <a class="portal-card" href="{{ url_for('donor_login') }}">Fund Donor Login</a>
+        <a class="portal-card" href="{{ url_for('admin_login') }}">Admin Login</a>
+    </div>
+</section>
+{% endblock %}

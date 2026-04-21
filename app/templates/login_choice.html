@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block title %}Login - Share Bite{% endblock %}
+
+{% block content %}
+<style>
+.login-page {
+    min-height: 80vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.login-content {
+    max-width: 1200px;
+    width: 100%;
+}
+
+.login-content h2 {
+    text-align: center;
+    color: white;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.login-content p {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1rem;
+    margin-bottom: 40px;
+}
+
+.choice-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.portal-card {
+    background: white;
+    border-radius: 15px;
+    padding: 35px 25px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    color: white;
+}
+
+.portal-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.portal-card h3 {
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.portal-card p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.95rem;
+}
+</style>
+
+<div class="login-page">
+    <div class="login-content">
+        <h2>🔐 Login Portal</h2>
+        <p>Select your role to manage your Share Bite activities</p>
+        <div class="choice-grid">
+            <a class="portal-card" href="{{ url_for('restaurant_login') }}" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                <h3>🏪 Restaurant</h3>
+                <p>Post food donations</p>
+            </a>
+            <a class="portal-card" href="{{ url_for('ngo_login') }}" style="background: linear-gradient(135deg, #06d6a0 0%, #0ab886 100%);">
+                <h3>🤝 NGO</h3>
+                <p>Receive donations</p>
+            </a>
+            <a class="portal-card" href="{{ url_for('donor_login') }}" style="background: linear-gradient(135deg, #ff6b6b 0%, #ff5252 100%);">
+                <h3>💝 Donor</h3>
+                <p>Make contributions</p>
+            </a>
+            <a class="portal-card" href="{{ url_for('admin_login') }}" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                <h3>📊 Admin</h3>
+                <p>View analytics</p>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

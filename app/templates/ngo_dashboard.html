@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+
+{% block title %}NGO Dashboard - Share Bite{% endblock %}
+
+{% block content %}
+<style>
+body {
+    background: linear-gradient(135deg, #06d6a0 0%, #0ab886 100%);
+    min-height: 100vh;
+}
+
+.dashboard-wrapper {
+    padding: 30px 20px;
+}
+
+.dashboard-box {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-box h2 {
+    color: #06d6a0;
+    margin-bottom: 10px;
+}
+
+.dashboard-box p {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+    font-weight: 600;
+}
+
+.form-input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #06d6a0;
+    box-shadow: 0 0 0 3px rgba(6, 214, 160, 0.1);
+}
+
+.primary-button {
+    background: linear-gradient(135deg, #06d6a0 0%, #0ab886 100%);
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.primary-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(6, 214, 160, 0.3);
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.data-table thead {
+    background: #f5f5f5;
+}
+
+.data-table th, .data-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.data-table tbody tr:hover {
+    background: #f9f9f9;
+}
+
+.data-table th {
+    font-weight: 600;
+    color: #333;
+}
+
+.data-table td {
+    color: #666;
+}
+</style>
+
+<div class="dashboard-wrapper">
+<section class="dashboard-box">
+    <h2>🤝 Record Receiver Details</h2>
+    <p>Complete the form below to mark food donations as received. This helps us track impact!</p>
+    <form method="post">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            {{ form.ngo_name.label }}
+            {{ form.ngo_name(class='form-input', placeholder='Name of your NGO') }}
+        </div>
+        <div class="form-group">
+            {{ form.receiver_name.label }}
+            {{ form.receiver_name(class='form-input', placeholder='Name of person receiving') }}
+        </div>
+        <div class="form-group">
+            {{ form.receiver_phone.label }}
+            {{ form.receiver_phone(class='form-input', placeholder='Contact phone number') }}
+        </div>
+        <div class="form-group">
+            {{ form.food_item_id.label }}
+            {{ form.food_item_id(class='form-input') }}
+        </div>
+        <button type="submit" class="primary-button">✅ Mark Order Complete</button>
+    </form>
+</section>
+
+<section class="dashboard-box">
+    <h3>🍴 Available Food Donations</h3>
+    {% if available_items %}
+    <div style="overflow-x: auto;">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>🍴 Food</th>
+                <th>📦 Quantity</th>
+                <th>🏪 Restaurant</th>
+                <th>📱 Contact</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in available_items %}
+            <tr>
+                <td><strong>{{ item.food_name }}</strong></td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.restaurant_name }}</td>
+                <td>{{ item.restaurant_contact }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+    {% else %}
+    <p style="text-align: center; color: #999; padding: 30px;">No available food donations right now. Check back soon! 🕐</p>
+    {% endif %}
+</section>
+</div>
+{% endblock %}

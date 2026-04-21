@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block title %}Restaurant Login - Share Bite{% endblock %}
+
+{% block content %}
+<style>
+.login-page {
+    min-height: 80vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.login-content {
+    max-width: 500px;
+    width: 100%;
+    background: white;
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+}
+
+.login-content h2 {
+    color: #667eea;
+    margin-bottom: 10px;
+}
+
+.login-content p {
+    color: #666;
+    margin-bottom: 25px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: 600;
+}
+
+.form-input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.primary-button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.primary-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+}
+</style>
+
+<div class="login-page">
+    <div class="login-content">
+        <h2>🏪 Restaurant Portal</h2>
+        <p>Enter your restaurant details to start posting food donations.</p>
+        <form method="post">
+            <div class="form-group">
+                <label for="restaurant_id">🆔 Restaurant ID</label>
+                <input type="text" id="restaurant_id" name="restaurant_id" class="form-input" placeholder="Enter your restaurant ID" required>
+            </div>
+            <button type="submit" class="primary-button">→ Continue to Dashboard</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
